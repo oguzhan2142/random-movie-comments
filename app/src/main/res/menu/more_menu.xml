@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/copy_url"
+
+        android:icon="@drawable/ic_baseline_content_copy_24"
+        android:title="Linki Kopyala" />
+    <item
+        android:id="@+id/deneme2"
+        android:title="deneme2" />
+</menu>
