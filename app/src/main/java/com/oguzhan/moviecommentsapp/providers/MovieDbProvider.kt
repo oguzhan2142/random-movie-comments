@@ -47,12 +47,12 @@ class MovieDbProvider {
             val searchPage = gson.fromJson(body, SearchPage::class.java)
 
 
-            Log.d(TAG, "searchMovie: $body")
-            searchPage.results.forEach {
-                Log.d(TAG, "searchMovie: ${it.title}")
-            }
 
-            listOf<Result>()
+            val results = searchPage.results
+
+            results
+
+
 
         }
 
