@@ -41,7 +41,7 @@ class SearchResultsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_results_list, container, false)
         moviedbViewModel = ViewModelProvider(requireActivity()).get(MoviedbViewModel::class.java)
-        searchResultsViewModel = ViewModelProvider(this).get(SearchResultsViewModel::class.java)
+        searchResultsViewModel = ViewModelProvider(requireActivity()).get(SearchResultsViewModel::class.java)
 
         resultsAdapter = MyItemRecyclerViewAdapter(searchResultsViewModel.searchResults)
         moviedbViewModel.searchResults.observe(viewLifecycleOwner, {
