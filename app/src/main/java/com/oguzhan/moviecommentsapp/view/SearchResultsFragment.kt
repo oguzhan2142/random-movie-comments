@@ -3,37 +3,33 @@ package com.oguzhan.moviecommentsapp.view
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.oguzhan.moviecommentsapp.R
-import com.oguzhan.moviecommentsapp.model.Result
+import com.oguzhan.moviecommentsapp.utils.ThemeChecker.Companion.isDarkThemeOn
 import com.oguzhan.moviecommentsapp.viewmodel.MoviedbViewModel
 import com.oguzhan.moviecommentsapp.viewmodel.SearchResultsViewModel
+
 
 /**
  * A fragment representing a list of Items.
  */
 class SearchResultsFragment : Fragment() {
 
-    private var columnCount = 1
     private lateinit var moviedbViewModel: MoviedbViewModel
     private lateinit var searchResultsViewModel: SearchResultsViewModel
 
-    private lateinit var  resultsAdapter :MyItemRecyclerViewAdapter
+    private lateinit var resultsAdapter: MyItemRecyclerViewAdapter
 
+    private lateinit var recyclerView: RecyclerView
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +37,20 @@ class SearchResultsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_results_list, container, false)
         moviedbViewModel = ViewModelProvider(requireActivity()).get(MoviedbViewModel::class.java)
-        searchResultsViewModel = ViewModelProvider(requireActivity()).get(SearchResultsViewModel::class.java)
+        searchResultsViewModel =
+            ViewModelProvider(requireActivity()).get(SearchResultsViewModel::class.java)
+        recyclerView = view.findViewById(R.id.search_list)
 
-        resultsAdapter = MyItemRecyclerViewAdapter(searchResultsViewModel.searchResults)
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+
+        val resourceId =
+            if (context!!.isDarkThemeOn()) R.drawable.recycler_list_divider_white else R.drawable.recycler_list_divider_black
+        itemDecorator.setDrawable(ContextCompat.getDrawable(context!!, resourceId)!!)
+        recyclerView.addItemDecoration(itemDecorator)
+
+
+        resultsAdapter =
+            MyItemRecyclerViewAdapter(requireActivity(), searchResultsViewModel.searchResults)
         moviedbViewModel.searchResults.observe(viewLifecycleOwner, {
 
 
@@ -63,18 +70,5 @@ class SearchResultsFragment : Fragment() {
         return view
     }
 
-    companion object {
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            SearchResultsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
 }
