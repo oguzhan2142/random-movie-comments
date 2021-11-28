@@ -1,6 +1,7 @@
 package com.oguzhan.moviecommentsapp.adapters
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.ContentValues.TAG
@@ -14,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.mancj.materialsearchbar.MaterialSearchBar
 import com.oguzhan.moviecommentsapp.R
 import com.oguzhan.moviecommentsapp.model.Comment
 
@@ -34,7 +36,7 @@ class CommentsAdapter(private val context: Context, private val comments: Mutabl
         return PlaceHolder(inflatedView)
     }
 
-    @SuppressLint("RestrictedApi")
+
     override fun onBindViewHolder(holder: CommentsAdapter.PlaceHolder, position: Int) {
 
         val comment = comments[position]
@@ -42,6 +44,15 @@ class CommentsAdapter(private val context: Context, private val comments: Mutabl
         holder.contentTextView.text = comment.content
         holder.sourceTextView.text = comment.source
 
+
+
+        holder.itemView.setOnClickListener {
+            val bar = (context as Activity).findViewById<MaterialSearchBar>(R.id.searchBar)
+            bar.text =
+                comment.movieName
+            bar.openSearch()
+
+        }
         holder.moreBotton.setOnClickListener {
             Log.d(TAG, "onBindViewHolder: basildi")
             val popup = PopupMenu(context, holder.moreBotton)

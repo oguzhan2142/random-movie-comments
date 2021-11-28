@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 app:mt_hint="lord of the rings..."
                 app:mt_maxSuggestionsCount="10"
-                app:mt_placeholder="film ara"
+
                 app:mt_speechMode="true">
 
 

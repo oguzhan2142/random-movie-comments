@@ -1,6 +1,8 @@
 package com.oguzhan.moviecommentsapp.view
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -41,6 +43,7 @@ class MyItemRecyclerViewAdapter(
             .into(holder.imageView);
 
         holder.contentView.text = item.title
+
     }
 
     override fun getItemCount(): Int = values.size

@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity(), MaterialSearchBar.OnSearchActionListen
             layoutManager = LinearLayoutManager(applicationContext)
             isNestedScrollingEnabled = false
             addItemDecoration(decorator)
+
         }
 
 
