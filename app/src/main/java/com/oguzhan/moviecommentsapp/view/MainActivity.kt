@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getDrawable
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mancj.materialsearchbar.MaterialSearchBar
 import com.oguzhan.moviecommentsapp.R
 import com.oguzhan.moviecommentsapp.adapters.CommentsAdapter
+import com.oguzhan.moviecommentsapp.utils.CacheManager
 import com.oguzhan.moviecommentsapp.viewmodel.CommentsViewModel
 import com.oguzhan.moviecommentsapp.viewmodel.MoviedbViewModel
 import com.oguzhan.moviecommentsapp.viewmodel.SearchResultsViewModel
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity(), MaterialSearchBar.OnSearchActionListen
 
 
 //        searchFragmentContainer.visibility = View.GONE
+
 
         registerForContextMenu(recyclerView)
 
@@ -101,6 +104,10 @@ class MainActivity : AppCompatActivity(), MaterialSearchBar.OnSearchActionListen
         commentsViewModel.comments.observe(this, { comments ->
             Log.d(TAG, "onCreate: observed something")
             recyclerView.adapter = CommentsAdapter(this, comments)
+        })
+
+        commentsViewModel.dataCameFromCache.observe(this, {
+            findViewById<TextView>(R.id.cache_info).visibility = if (it) View.VISIBLE else View.GONE
         })
 
 
