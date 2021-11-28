@@ -67,8 +67,10 @@ class JetFilmIzleProvider : CommentProvider {
 
 
             } catch (e: Exception) {
-
                 e.printStackTrace()
+
+                val c = mutableListOf<Comment>()
+                return@withContext c
             }
 
 

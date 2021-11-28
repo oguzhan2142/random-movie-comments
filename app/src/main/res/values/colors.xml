@@ -7,4 +7,6 @@
     <color name="primary_color_shade_2">#DDFFBC</color>
     <color name="primary_color_shade_3">#91C788</color>
     <color name="primary_color_shade_4">#52734D</color>
+    <color name="opacity_color">#BFB3B0B0</color>
+
 </resources>
