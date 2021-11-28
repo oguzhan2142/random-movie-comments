@@ -3,7 +3,6 @@ package com.oguzhan.moviecommentsapp.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.oguzhan.moviecommentsapp.model.Comment
 import com.oguzhan.moviecommentsapp.providers.FilmKovasiCommentProvider
 import com.oguzhan.moviecommentsapp.providers.FullHdFilmIzleCommentProvider
@@ -18,9 +17,10 @@ class CommentsViewModel(application: Application) : AndroidViewModel(application
 
     var dataCameFromCache = MutableLiveData(false)
 
-    var manager: CacheManager = CacheManager(getApplication())
+    var cacheManager: CacheManager = CacheManager(getApplication())
 
     val comments = MutableLiveData<MutableList<Comment>>()
+    var isError = MutableLiveData(false)
 
     private val fullHdFilmIzleProvider = FullHdFilmIzleCommentProvider()
     private val filmKovasiProvider = FilmKovasiCommentProvider()
@@ -29,7 +29,7 @@ class CommentsViewModel(application: Application) : AndroidViewModel(application
 
 
     suspend fun fetchComments() = coroutineScope {
-        comments.value = manager.retrive().toMutableList()
+        comments.value = cacheManager.retrive().toMutableList()
 
         try {
 
@@ -40,13 +40,15 @@ class CommentsViewModel(application: Application) : AndroidViewModel(application
             val result =
                 fullHdFilmIzleComments.await() + filmKovasiComments.await() + superFullHdFilmIzleComments.await() + jetFilmIzleComments.await()
 
-            manager.save(result.toMutableList())
+            cacheManager.save(result.toMutableList())
             comments.value = result.toMutableList()
             dataCameFromCache.value = false
 
         } catch (e: Exception) {
             if (!comments.value.isNullOrEmpty()) {
                 dataCameFromCache.value = true
+            }else{
+                isError.value = true
             }
         }
 
