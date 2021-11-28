@@ -1,8 +1,8 @@
-package com.oguzhan.moviecommentsapp.view
+package com.oguzhan.moviecommentsapp.adapters
 
-import android.content.ContentValues.TAG
+import android.app.Activity
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,12 +13,14 @@ import com.oguzhan.moviecommentsapp.R
 import com.oguzhan.moviecommentsapp.databinding.FragmentSearchResultsBinding
 import com.oguzhan.moviecommentsapp.model.Result
 import com.oguzhan.moviecommentsapp.utils.Config
+import com.oguzhan.moviecommentsapp.view.MOVIE_DETAIL_ACTIVITY_BUNDLE_KEY
+import com.oguzhan.moviecommentsapp.view.MovieDetailsActivity
 
 
-class MyItemRecyclerViewAdapter(
-    private val context:Context,
+class SearchResultsRecyclerViewAdapter(
+    private val context: Context,
     private val values: MutableList<Result>
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<SearchResultsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -44,6 +46,12 @@ class MyItemRecyclerViewAdapter(
 
         holder.contentView.text = item.title
 
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent(context, MovieDetailsActivity::class.java)
+            intent.putExtra(MOVIE_DETAIL_ACTIVITY_BUNDLE_KEY,item.id)
+            (context as Activity).startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = values.size

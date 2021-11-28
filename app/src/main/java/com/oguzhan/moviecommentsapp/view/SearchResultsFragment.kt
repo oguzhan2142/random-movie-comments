@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oguzhan.moviecommentsapp.R
+import com.oguzhan.moviecommentsapp.adapters.SearchResultsRecyclerViewAdapter
 import com.oguzhan.moviecommentsapp.utils.ThemeChecker.Companion.isDarkThemeOn
 import com.oguzhan.moviecommentsapp.viewmodel.MoviedbViewModel
 import com.oguzhan.moviecommentsapp.viewmodel.SearchResultsViewModel
@@ -26,7 +27,7 @@ class SearchResultsFragment : Fragment() {
     private lateinit var moviedbViewModel: MoviedbViewModel
     private lateinit var searchResultsViewModel: SearchResultsViewModel
 
-    private lateinit var resultsAdapter: MyItemRecyclerViewAdapter
+    private lateinit var resultsAdapter: SearchResultsRecyclerViewAdapter
 
     private lateinit var recyclerView: RecyclerView
 
@@ -50,7 +51,7 @@ class SearchResultsFragment : Fragment() {
 
 
         resultsAdapter =
-            MyItemRecyclerViewAdapter(requireActivity(), searchResultsViewModel.searchResults)
+            SearchResultsRecyclerViewAdapter(requireActivity(), searchResultsViewModel.searchResults)
         moviedbViewModel.searchResults.observe(viewLifecycleOwner, {
 
 
