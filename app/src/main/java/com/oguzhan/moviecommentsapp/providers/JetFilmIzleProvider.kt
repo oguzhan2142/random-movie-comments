@@ -76,7 +76,7 @@ class JetFilmIzleProvider : CommentProvider {
 
             val c = commentsFromDoc(doc)
 
-            c.forEach { Log.d(TAG, "getComments: ${it.movieName}") }
+
 
             c
 

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
+    <color name="theme_1">#23232b</color>
+    <color name="theme_2">#17181c</color>
 
     <color name="primary_color_shade_1">#FEFFDE</color>
     <color name="primary_color_shade_2">#DDFFBC</color>
     <color name="primary_color_shade_3">#91C788</color>
     <color name="primary_color_shade_4">#52734D</color>
     <color name="opacity_color">#BFB3B0B0</color>
+
+
+    <color name="white">#CCCCCC</color>
+    <color name="year_color">#A6CCCCCC</color>
 
 </resources>

@@ -3,6 +3,7 @@ package com.oguzhan.moviecommentsapp.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.oguzhan.moviecommentsapp.model.Comment
 import com.oguzhan.moviecommentsapp.providers.FilmKovasiCommentProvider
 import com.oguzhan.moviecommentsapp.providers.FullHdFilmIzleCommentProvider
@@ -28,6 +29,16 @@ class CommentsViewModel(application: Application) : AndroidViewModel(application
     private val jetFilmIzleProvider = JetFilmIzleProvider()
 
 
+    fun getCommentsAsStringArray(): ArrayList<String> {
+
+        val list = arrayListOf<String>()
+        comments.value?.forEach {
+            val str = Gson().toJson(it, Comment::class.java)
+            list.add(str)
+        }
+        return list
+    }
+
     suspend fun fetchComments() = coroutineScope {
         comments.value = cacheManager.retrive().toMutableList()
 
@@ -47,7 +58,7 @@ class CommentsViewModel(application: Application) : AndroidViewModel(application
         } catch (e: Exception) {
             if (!comments.value.isNullOrEmpty()) {
                 dataCameFromCache.value = true
-            }else{
+            } else {
                 isError.value = true
             }
         }

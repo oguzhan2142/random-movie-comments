@@ -7,110 +7,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/primary_color_shade_1"
+    android:background="@color/theme_1"
     android:fillViewport="true"
+
     tools:context=".view.MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="24dp" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/artifika"
+            android:text="Dünyanın en güzel filmini bul"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            android:id="@+id/searchBar"
+            style="@style/MaterialSearchBarLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_color_shade_1"
-            tools:context=".view.MainActivity">
+            android:layout_marginTop="32dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:mt_hint="lord of the rings..."
+            app:mt_hintColor="@color/white"
+            app:mt_maxSuggestionsCount="10"
+            app:mt_searchBarColor="@color/theme_2"
+            app:mt_speechMode="true"
+            app:mt_textColor="@color/white">
 
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/artifika"
-                android:text="Comment App"
-                android:textColor="@color/primary_color_shade_4"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.215"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="64dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.329"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/thinking"
-                app:tint="@color/primary_color_shade_4" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="24dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.mancj.materialsearchbar.MaterialSearchBar
-                android:id="@+id/searchBar"
-                style="@style/MaterialSearchBarLight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:mt_hint="lord of the rings..."
-                app:mt_maxSuggestionsCount="10"
-
-                app:mt_speechMode="true">
+        </com.mancj.materialsearchbar.MaterialSearchBar>
 
 
-            </com.mancj.materialsearchbar.MaterialSearchBar>
+        <TextView
+            android:id="@+id/status_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="veriler güncel değildir!"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar"
+            tools:visibility="gone" />
 
+        <fragment
+            android:id="@+id/search_fragment"
+            class="com.oguzhan.moviecommentsapp.view.SearchResultsFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar"
+            tools:layout="@layout/fragment_search_results_list"
+            tools:visibility="gone" />
 
-            <TextView
-                android:id="@+id/status_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="veriler güncel değildir!"
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="IMDb Top 250"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
-            <fragment
-                android:id="@+id/search_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                class="com.oguzhan.moviecommentsapp.view.SearchResultsFragment"
-                tools:layout="@layout/fragment_search_results_list" />
-
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/top250_view_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:text="Hepsi"
+            android:textColor="@color/year_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/comments"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_color_shade_1"
-            android:clipToPadding="false"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:id="@+id/imdb_top25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:listitem="@layout/movie_list_item" />
 
-            tools:listitem="@layout/list_item_comment">
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/thinking"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieCommentsApp">
-        <activity android:name=".view.MovieDetailsActivity"></activity>
+        <activity android:name=".UserCommentsActivity"></activity>
+        <activity android:name=".view.MovieDetailsActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
